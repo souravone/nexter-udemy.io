@@ -15,7 +15,8 @@ $font-primary: "Nunito", sans-serif;
 $font-display: "Josefin Sans", sans-serif;
 
 @function calculateRem($size) {
-  $remSize: $size / 16px;
+  // $remSize: $size / 16px;
+  $remSize: calc($size/ 16px);
   @return #{$remSize}rem;
 }
 
@@ -48,6 +49,16 @@ body {
   display: grid;
   grid-template-rows: 80vh min-content 40vw repeat(3, min-content);
   grid-template-columns:
-    calculateRem(80px) 1fr repeat(8, minmax(min-content, calculateRem(120px)))
-    1fr;
+    [sidebar-start]
+    calculateRem(80px) [sidebar-end full-start] minmax(calculateRem(40px), 1fr) [center-start] repeat(
+      8,
+      [col-start] minmax(min-content, calculateRem(125px)) [col-end]
+    )
+    [center-end]
+    minmax(calculateRem(40px), 1fr) [full-end];
+
+  // & > * {
+  //   @include fontSize(40px);
+  //   padding: calculateRem(40px);
+  // }
 }
