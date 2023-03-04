@@ -6,12 +6,12 @@
       rgba($color-secondary, 0.9)
     ),
     url(../img/hero.jpeg);
-  background-size: cover;
+  background-size: 101%, cover;
   background-position: center;
 
   display: grid;
-  grid-template-rows: 1fr min-content calculateRem(60px) 1fr;
-  grid-template-columns: max-content;
+  grid-template-rows: 1fr min-content minmax(calculateRem(60px), min-content) 1fr;
+  grid-template-columns: minmax(min-content, max-content);
   row-gap: calculateRem(15px);
   padding: calculateRem(80px);
   padding-top: calculateRem(40px);
@@ -27,11 +27,41 @@
     justify-self: start;
   }
   &__seenon-text {
+    display: grid;
+    grid-template-columns: 1fr max-content 1fr;
+    font-size: calculateRem(16px);
+    color: $color-grey-light-2;
+    column-gap: calculateRem(16px);
+    align-items: center;
+
+    &::before,
+    &::after {
+      content: "";
+      display: block;
+      height: 1px;
+      background-color: currentColor;
+    }
   }
 
   &__seenon-logo {
+    // display: grid;
+    // grid-template-columns: repeat(4, 1fr);
+    // column-gap: calculateRem(30px);
+    display: flex;
+    justify-content: space-around;
+
     img {
-      height: calculateRem(25px);
+      max-height: calculateRem(25px);
+      max-width: 100%;
+      filter: brightness(70%);
     }
+  }
+
+  @media only screen and (max-width: $bp-medium) {
+    grid-column: 1/-1;
+  }
+
+  @media only screen and (max-width: $bp-small) {
+    padding: calculateRem(50px);
   }
 }
